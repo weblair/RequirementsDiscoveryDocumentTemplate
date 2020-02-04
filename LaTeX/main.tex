@@ -1,0 +1,71 @@
+\documentclass{book}
+
+\newcommand{\ProjectName}{[PROJECT NAME]}
+\newcommand{\DocumentAuthor}{[DOCUMENT AUTHOR]}
+\newif\ifdraft{}
+\drafttrue{}
+
+\usepackage[hidelinks,pdfusetitle]{hyperref}
+\usepackage{bookmark}
+\usepackage{booktabs}
+\usepackage{fancyhdr}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{makeidx}
+\usepackage{titlepic}
+\usepackage[normalem]{ulem}
+\usepackage{vhistory}
+\usepackage[capitalize]{cleveref}
+
+\pagestyle{fancy}
+\fancyhf{}
+
+\ifdraft{}
+    \chead{DRAFT}
+    \cfoot{DRAFT}
+\fi
+\lhead{\ProjectName}
+\rhead{\leftmark}
+\lfoot{\thepage}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0.5pt}
+
+\renewcommand*\thesection{\arabic{section}}
+
+\newtheorem{story}{User Story}
+
+\title{\ProjectName{} \\ Requirements Discovery Document}
+%\titlepic{\includegraphics[width=0.5\textwidth]{logo.png}}
+\author{\DocumentAuthor}
+\date{\vhCurrentDate}
+
+\makeindex
+
+\begin{document}
+\maketitle
+
+\frontmatter
+
+\input{vhistory}
+
+\cleardoublepage{}
+\pdfbookmark{\contentsname}{Contents}
+\tableofcontents
+
+\mainmatter{}
+\part{Definition of Done}\label{part:dod}
+\input{dod/objectives}
+\input{dod/victory_conditions}
+
+\part{User Stories}\label{part:stories}
+\input{stories/stories}
+
+%\bookmarksetupnext{level=part}
+%\appendix\addcontentsline{toc}{part}{Appendices}
+
+\cleardoublepage{}
+\addcontentsline{toc}{chapter}{Index}
+\printindex
+
+\cleardoublepage{}
+\end{document}
